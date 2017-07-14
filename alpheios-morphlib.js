@@ -582,28 +582,28 @@ function launchPopup(morpgresponse, instance) {
         myWindow.document.write('</div>');
         myWindow.document.write('<div class="morphlib-label morphlib-form-label">Form(s):</div>');
         for (var x = 0; x < entries[i].inflections.length; x++) {
-            var form = entries[i].inflections[x]["term"]["stem"];
-            if (entries[i].inflections[x]["term"]["suff"]) {
-                form = form + "-" + entries[i].inflections[x]["term"]["suff"];
+            var form = entries[i].inflections[x]["term"]["stem"]["$"];
+            if (entries[i].inflections[x]["term"]["suff"]["$"]) {
+                form = form + "-" + entries[i].inflections[x]["term"]["suff"]["$"];
             }
             myWindow.document.write('<div class="morphlib-infl-set" context="' + form + '" class="morphlib-infl-set"><span class="morphlib-term">' + form + '</span>');
             myWindow.document.write('<div class="morphlib-infl">');
-            if (entries[i].inflections[x]["pers"]) {
-                myWindow.document.write('<span class="morphlib-pers">' + entries[i].inflections[x]["pers"] + ' person</span>');
+            if (entries[i].inflections[x]["pers"]["$"]) {
+                myWindow.document.write('<span class="morphlib-pers">' + entries[i].inflections[x]["pers"]["$"] + ' person</span>');
             }
-            if (entries[i].inflections[x]["num"]) {
-                myWindow.document.write('<span class="morphlib-num">' + entries[i].inflections[x]["num"] + '; </span>');
+            if (entries[i].inflections[x]["num"]["$"]) {
+                myWindow.document.write('<span class="morphlib-num">' + entries[i].inflections[x]["num"]["$"] + '; </span>');
             }
-            if (entries[i].inflections[x]["tense"]) {
-                myWindow.document.write('<span class="morphlib-tense">' + entries[i].inflections[x]["tense"] + ' </span>');
+            if (entries[i].inflections[x]["tense"]["$"]) {
+                myWindow.document.write('<span class="morphlib-tense">' + entries[i].inflections[x]["tense"]["$"] + ' </span>');
             }
-            if (entries[i].inflections[x]["mood"]) {
-                myWindow.document.write('<span class="morphlib-mood">' + entries[i].inflections[x]["mood"] + '; </span>');
+            if (entries[i].inflections[x]["mood"]["$"]) {
+                myWindow.document.write('<span class="morphlib-mood">' + entries[i].inflections[x]["mood"]["$"] + '; </span>');
             }
-            if (entries[i].inflections[x]["voice"]) {
-                myWindow.document.write('<span class="morphlib-voice">' + entries[i].inflections[x]["voice"] + '</span>');
+            if (entries[i].inflections[x]["voice"]["$"]) {
+                myWindow.document.write('<span class="morphlib-voice">' + entries[i].inflections[x]["voice"]["$"] + '</span>');
             }
-            if (entries[i].inflections[x]["case"]) {
+            if (entries[i].inflections[x]["case"]["$"]) {
                 myWindow.document.write('<span class="morphlib-voice">' + entries[i].inflections[x]["case"]["$"] + '</span>');
             }
             myWindow.document.write('</div></div>');
@@ -709,10 +709,10 @@ function wwparser(result, instance, tokenobj) {
                 var shortdefh = analysis[i]["rest"]["entry"]["mean"];
                 if (Object.prototype.toString.call(shortdefh) === '[object Array]') {
                     for (var l = 0; l < shortdefh.length; l++) {
-                        shortdef = shortdef + shortdefh[l] + "&#13;&#10;";
+                        shortdef = shortdef + shortdefh[l]["$"] + "&#13;&#10;";
                     }
                 } else {
-                    shortdef = shortdefh;
+                    shortdef = shortdefh["$"];
                 }
                 if (instance.prefs.getdebugstatus()) {
                     console.log("short definition found");
@@ -739,11 +739,11 @@ function wwparser(result, instance, tokenobj) {
                 }
             }
         } else {
-            if (analysis["rest"]["entry"]["mean"] == "Assume\nthis\nis\ncapitalized\nproper\nname/abbr") {
+            if (analysis["rest"]["entry"]["mean"]["$"] == "Assume\nthis\nis\ncapitalized\nproper\nname/abbr") {
                 if (instance.prefs.getdebugstatus()) {
                     console.log("Proper noun");
                 }
-                shortdef = analysis["rest"]["entry"]["mean"];
+                shortdef = analysis["rest"]["entry"]["mean"]["$"];
                 var infls = [];
                 infls.push(analysis["rest"]["entry"]["infl"]);
                 var lemma = "";
@@ -777,10 +777,10 @@ function wwparser(result, instance, tokenobj) {
                     var shortdefh = analysis["rest"]["entry"]["mean"];
                     if (Object.prototype.toString.call(shortdefh) === '[object Array]') {
                         for (var l = 0; l < shortdefh.length; l++) {
-                            shortdef = shortdef + shortdefh[l] + "&#13;&#10;";
+                            shortdef = shortdef + shortdefh[l]["$"] + "&#13;&#10;";
                         }
                     } else {
-                        shortdef = shortdefh;
+                        shortdef = shortdefh["$"];
                     }
                 }
                 if (instance.prefs.getdebugstatus()) {
